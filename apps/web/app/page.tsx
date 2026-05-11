@@ -267,7 +267,7 @@ export default function SahiDawaHome() {
       <div className="h-16 md:hidden"></div>
 
       {/* Mobile Bottom Navigation (Visible only on small screens) */}
-      <nav className="md:hidden fixed bottom-0 left-0 right-0 bg-white/90 backdrop-blur-md border-t border-slate-200/60 flex justify-around px-2 py-3 items-center z-50 pb-safe">
+      <nav className="md:hidden fixed bottom-0 left-0 right-0 bg-white/90 backdrop-blur-md border-t border-slate-200/60 flex justify-around px-2 py-3 items-center z-50 pb-[env(safe-area-inset-bottom)]">
         <button className="flex flex-col items-center gap-1.5 w-16 group">
           <div className="text-emerald-600 group-hover:-translate-y-1 transition-transform">
             <Home size={24} strokeWidth={2.5} />
