@@ -59,9 +59,39 @@ app.get('/', (req: Request, res: Response) => {
   res.send('SahiDawa-India API is running successfully!');
 });
 
-app.get('/health', (req: Request, res: Response) => {
+app.get('/health', async (req: Request, res: Response) => {
   logger.info('Health check endpoint accessed');
-  res.json({ status: 'ok', timestamp: new Date().toISOString() });
+  
+  try {
+    // Run a lightweight test query to confirm DB connection is alive
+    const { error } = await supabase
+      .from('medicines')
+      .select('id')
+      .limit(1);
+
+    if (error) {
+      return res.status(503).json({
+        status: 'degraded',
+        db: 'unreachable',
+        error: error.message,
+        timestamp: new Date().toISOString(),
+      });
+    }
+
+    return res.json({
+      status: 'ok',
+      db: 'connected',
+      timestamp: new Date().toISOString(),
+    });
+  } catch (err: unknown) {
+    const message = err instanceof Error ? err.message : 'Unknown error';
+    return res.status(500).json({
+      status: 'error',
+      db: 'unreachable',
+      error: message,
+      timestamp: new Date().toISOString(),
+    });
+  }
 });
 
 app.use('/reports', reportsRouter);
