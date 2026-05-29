@@ -8,6 +8,7 @@ import { ThemeProvider } from "./components/ThemeProvider";
 import { OfflineBanner } from "@/components/OfflineBanner";
 import { OfflineErrorBoundary } from "@/components/OfflineErrorBoundary";
 import { ServiceWorkerProvider } from "@/components/ServiceWorkerProvider";
+import BackToTopButton from "./components/BackToTopButton";
 import Chatbot from "./components/Chatbot";
 import "./globals.css";
 import "../../src/styles/print.css";
@@ -60,7 +61,7 @@ export default async function LocaleLayout({
     return (
         <html lang={locale} suppressHydrationWarning>
             {/* REPLACE YOUR OLD BODY TAG WITH THIS ONE: */}
-            <body className="bg-[var(--color-surface-page)] text-[var(--color-text-primary)] transition-colors duration-300">
+            <body className="bg-(--color-surface-page) text-(--color-text-primary) transition-colors duration-300">
                 <ServiceWorkerProvider>
                     <ThemeProvider>
                         <NextIntlClientProvider messages={messages}>
@@ -69,6 +70,7 @@ export default async function LocaleLayout({
                                 {children}
                                 <Footer />
                                 <div className="no-print">
+                                    <BackToTopButton />
                                     <Chatbot />
                                 </div>
                             </OfflineErrorBoundary>
