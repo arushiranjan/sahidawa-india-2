@@ -13,6 +13,9 @@ type Message = {
 
 export default function Chatbot() {
     const pathname = usePathname();
+    if (pathname.includes("/health")) {
+        return null;
+    }
     const [isOpen, setIsOpen] = useState(false);
     const [messages, setMessages] = useState<Message[]>([
         {
