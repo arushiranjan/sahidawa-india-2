@@ -51,8 +51,10 @@ class TriageAnalysis(BaseModel):
 
 # ── Node Implementations ──────────────────────────────────────────────────────
 
-def get_llm(model: str = "gemini-2.5-flash"):
-    api_key = os.getenv("GEMINI_API_KEY")
+=======
+def get_llm(model: str = "gemini-3.5-flash"):
+    api_key = os.getenv("GOOGLE_API_KEY")
+>>>>>>> 6fbd9ad78ce81a22b6eb45083b1ea6c13ab86b20
     return ChatGoogleGenerativeAI(model=model, temperature=0, google_api_key=api_key)
 
 def input_guardrail_node(state: TriageState) -> Dict[str, Any]:
