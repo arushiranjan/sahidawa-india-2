@@ -3,7 +3,7 @@ import logging
 from typing import List, Dict, Any, TypedDict
 from pydantic import BaseModel, Field
 from dotenv import load_dotenv
-from services.retrieval import retrieve_relevant_medicines
+from retrieval import retrieve_relevant_medicines
 
 load_dotenv()
 
@@ -51,10 +51,8 @@ class TriageAnalysis(BaseModel):
 
 # ── Node Implementations ──────────────────────────────────────────────────────
 
-=======
-def get_llm(model: str = "gemini-3.5-flash"):
-    api_key = os.getenv("GOOGLE_API_KEY")
->>>>>>> 6fbd9ad78ce81a22b6eb45083b1ea6c13ab86b20
+def get_llm(model: str = "gemini-2.5-flash"):
+    api_key = os.getenv("GEMINI_API_KEY")
     return ChatGoogleGenerativeAI(model=model, temperature=0, google_api_key=api_key)
 
 def input_guardrail_node(state: TriageState) -> Dict[str, Any]:
@@ -275,7 +273,6 @@ def format_medicine_context(medicines: List[Dict[str, Any]]) -> str:
             f"Brand: {medicine.get('brand_name', 'Unknown')}",
             f"Generic: {medicine.get('generic_name', 'Unknown')}",
             f"Composition: {medicine.get('composition', 'Unknown')}",
-            f"Strength: {medicine.get('strength', 'Unknown')}",
         ]
         manufacturer = medicine.get("manufacturer")
         if manufacturer:

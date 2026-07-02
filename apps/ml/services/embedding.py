@@ -69,4 +69,3 @@ def embed_query(text: str) -> Optional[list[float]]:
     except Exception:
         logging.exception("Unexpected embedding error.")
         return None
-

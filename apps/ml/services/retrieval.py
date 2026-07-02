@@ -5,7 +5,7 @@ from typing import Any
 import requests
 from dotenv import load_dotenv
 
-from services.embedding import embed_query
+from embedding import embed_query
 
 load_dotenv()
 
